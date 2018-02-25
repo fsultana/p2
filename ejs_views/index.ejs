@@ -19,6 +19,7 @@
     </head> 
 	
     <body>
+		
         <div class="jumbotron container">
         <h2 align="center">User Registration Page</h2>
 
@@ -27,35 +28,72 @@
 			<tbody>
 				<tr>
 					<td align="right">Email:</td>
-					<td><input type="text" name="email" value="<%= locals.email %>"></td>
-					<td><% if( typeof locals.email !== "undefined" && locals.email.indexOf("@") < 0 ){ %><font style="color: red;">@ is required</font><% } %></td>
+					<td><input type="text" name="email" value="<%= user.email %>"></td>
+					<td><% if( user.checkValidity && user.getErrors().includes("email") ){
+							%><font style="color: red;">@ is required</font><% } %></td>
 				</tr>
 				<tr>
 					<td align="right">Password:</td>
-					<td><input type="password" name="password" value="<%= locals.password %>"></td>
-                    <td><% if( typeof locals.password !== "undefined" && locals.password.length < 4 ){
-                         %><font style="color: red;">min 4 chars</font><% } %></td>
+					<td><input type="password" name="password" value="<%= user.password %>"></td>
+                    <td><% if( user.checkValidity && user.getErrors().includes("password") ){
+                         %><font style="color: red;">Min 4 chars</font><% } %></td>
 				</tr>
 				<tr>
 					<td align="right">Programming Skills:</td>
 					<td>
-						
+						<input type="checkbox" name="nodejs" value="nodejs"
+							<% if(user.skills.includes("Nodejs")){ %>checked<% } %>
+								> Nodejs &nbsp
+						<input type="checkbox" name="java" value="java"
+                            <% if(user.skills.includes("Java")){ %>checked<% } %>
+								> Java &nbsp
+						<input type="checkbox" name="aspnet" value="aspnet"
+                            <% if(user.skills.includes("ASP.NET")){ %>checked<% } %>
+								> ASP.NET &nbsp
+						<input type="checkbox" name="php" value="php"
+                            <% if(user.skills.includes("PHP")){ %>checked<% } %>
+								> PHP &nbsp
 					</td>
-					<td></td>
+					<td><% if( user.checkValidity && user.getErrors().includes("skills") ){
+						%><font style="color: red;">At least one skill is required</font><% } %></td>
 				</tr>
 				<tr>
 					<td align="right">Major</td>
-					
-					<td></td>
+					<td>
+						<input type="radio" name="major" value="CS"
+							<% if(user.major === "CS"){ %>checked<% } %>
+								> CS &nbsp
+						<input type="radio" name="major" value="SE"
+							<% if(user.major ==="SE"){ %>checked<% } %>
+								> SE &nbsp
+					</td>
+					<td><% if( user.checkValidity && user.getErrors().includes("major") ){
+						%><font style="color: red;">Not selected</font><% } %></td>
 				</tr>
 				<tr>
 					<td align="right">Residency</td>
 					<td>
-						<select name="city">
-						
+						<select id="city" name="city">
+							<option value="">-- Choose --</option>
+							<option value="Edmond"
+                                <% if(user.residency  === "Edmond"){ %>selected<% } %>
+								>Edmond</option>
+							<option value="OKC"
+                                <% if(user.residency  === "OKC"){ %>selected<% } %>
+								>Oklahoma City</option>
+							<option value="Moore"
+                                <% if(user.residency  === "Moore"){ %>selected<% } %>
+								>Moore</option>
+							<option value="Bethany"
+                                <% if(user.residency  === "Bethany"){ %>selected<% } %>
+								>Bethany</option>
+							<option value="Norman"
+                                <% if(user.residency  === "Norman"){ %>selected<% } %>
+								>Norman</option>
 						</select>
 					</td>
-					<td></td>
+					<td><% if( user.checkValidity && user.getErrors().includes("residency") ){
+						%><font style="color: red;">Not selected</font><% } %></td>
 				</tr>
 				<tr>
 					<td></td>

@@ -16,29 +16,27 @@
 			<tbody>
 				<tr>
 					<td align="right">Email:</td>
-					<td><%= locals.email %></td>
+					<td><%= user.email %></td>
 				</tr>
 				<tr>
 					<td align="right">Password:</td>
-					<td><%= locals.password %></td>
+					<td><%= user.password %></td>
 				</tr>
 				<tr>
 					<td align="right">Programming Skills:</td>
 					<td>
-						
+						<% for(var i = 0; i < user.skills.length; i++){
+							%><%- user.skills[i] + "&nbsp&nbsp" %><%
+						} %>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">Major</td>
-					<td>
-						
-					</td>
+					<td><%= user.major %></td>
 				</tr>
 				<tr>
 					<td align="right">Residency</td>
-					<td>
-						
-					</td>
+					<td><%= user.residency  %></td>
 				</tr>
 			</tbody>
 			</table>
